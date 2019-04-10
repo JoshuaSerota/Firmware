@@ -51,6 +51,9 @@
 
 #include <limits>
 
+#include <iostream>
+#include <fstream>
+
 #ifdef ENABLE_UART_RC_INPUT
 #ifndef B460800
 #define B460800 460800
@@ -837,15 +840,30 @@ void Simulator::poll_for_MAVLink_messages()
 
 			int len = ::recvfrom(_fd, _buf, sizeof(_buf), 0, (struct sockaddr *)&_srcaddr, (socklen_t *)&_addrlen);
 
-			if (len > 0) {
+            //if (len > 0) {
+            if (len) {};
 				mavlink_message_t msg;
+                unsigned char afl_buf[2048];
+                std::streampos length;
+                std::ifstream afl_file;
+                afl_file.open("/home/josh/Documents/CSE637/px4/firmware_fork/afl/input_file", std::ios::in|std::ios::binary|std::ios::ate);
+                if (afl_file.is_open())
+                {
+                    length = afl_file.tellg();
+                    if (length > (int)sizeof(afl_buf)) {
+                        length = (int)sizeof(afl_buf);
+                    }
+                    if (afl_file.seekg(0, std::ios::beg)){};
+                    if (afl_file.read((char*)afl_buf, length)){};
+                    afl_file.close();
 
-				for (int i = 0; i < len; i++) {
-					if (mavlink_parse_char(MAVLINK_COMM_0, _buf[i], &msg, &mavlink_status)) {
-						handle_message(&msg);
-					}
-				}
-			}
+                    for (int i = 0; i < length; i++) {
+                        if (mavlink_parse_char(MAVLINK_COMM_0, afl_buf[i], &msg, &mavlink_status)) {
+                            handle_message(&msg);
+                        }
+                    }
+                }
+            //}
 		}
 
 #ifdef ENABLE_UART_RC_INPUT

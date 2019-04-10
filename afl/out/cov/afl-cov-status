@@ -1,0 +1,3 @@
+afl_cov_pid     : 31780
+afl_cov_version : 0.6.1
+command_line    : /usr/bin/afl-cov -d ./afl/out/ --coverage-cmd cp -rf AFL_FILE ./afl/input_file && ../firmware-gcov/build/px4_sitl_default/bin/px4 /home/josh/Documents/CSE637/px4/firmware_fork/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -t /home/josh/Documents/CSE637/px4/firmware_fork/test_data --code-dir ../firmware-gcov --overwrite
