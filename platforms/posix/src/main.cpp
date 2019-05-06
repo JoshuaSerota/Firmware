@@ -276,6 +276,8 @@ int main(int argc, char **argv)
 
 		ret = run_startup_script(commands_file, absolute_binary_path, instance);
 
+        system("/bin/sh scripts/delayed_shutdown.sh &");
+
 		// We now block here until we need to exit.
 		if (pxh_off) {
 			wait_to_exit();
@@ -301,6 +303,7 @@ int main(int argc, char **argv)
 
 	return PX4_OK;
 }
+
 
 int create_symlinks_if_needed(std::string &data_path)
 {

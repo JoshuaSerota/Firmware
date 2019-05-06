@@ -1,0 +1,7 @@
+To compile with afl, export environmental variables CC="afl-gcc" and CXX="afl-g++"
+
+To compile with coverage, export environmental variable PX4_CMAKE_BUILD_TYPE=Coverage
+
+Before running px4 manually, add the build's bin directory to the path. You must also export PX4_SIM_MODEL=iris
+
+
