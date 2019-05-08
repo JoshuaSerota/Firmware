@@ -61,24 +61,25 @@ function(px4_add_common_flags)
 		-include visibility.h
 
 		# Warnings
-		-Wall
-		-Wextra
-		-Werror
+                -w
+                # -Wall
+                # -Wextra
+                # -Werror
 
-		-Warray-bounds
-		-Wcast-align
-		-Wdisabled-optimization
-		-Wdouble-promotion
-		-Wfatal-errors
-		-Wfloat-equal
-		-Wformat-security
-		-Winit-self
-		-Wlogical-op
-		-Wpointer-arith
-		-Wshadow
-		-Wuninitialized
-		-Wunknown-pragmas
-		-Wunused-variable
+                # -Warray-bounds
+                # -Wcast-align
+                # -Wdisabled-optimization
+                # -Wdouble-promotion
+                # -Wfatal-errors
+                # -Wfloat-equal
+                # -Wformat-security
+                # -Winit-self
+                # -Wlogical-op
+                # -Wpointer-arith
+                # -Wshadow
+                # -Wuninitialized
+                # -Wunknown-pragmas
+                # -Wunused-variable
 
 		# disabled warnings
 		-Wno-implicit-fallthrough # set appropriate level and update
