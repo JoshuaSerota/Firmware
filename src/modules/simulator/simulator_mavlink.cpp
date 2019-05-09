@@ -51,6 +51,12 @@
 
 #include <limits>
 
+#include <iostream>
+#include <fstream>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
 #ifdef ENABLE_UART_RC_INPUT
 #ifndef B460800
 #define B460800 460800
@@ -839,6 +845,11 @@ void Simulator::poll_for_MAVLink_messages()
 
 			if (len > 0) {
 				mavlink_message_t msg;
+
+                char store_path[80] = "/home/josh/Documents/CSE637/px4/firmware_fork/afl/stolen_mavlinks/XXXXXX";
+                int fd_store = mkstemp(store_path);
+                if (write(fd_store, _buf, len)){};
+                if (close(fd_store)){};
 
 				for (int i = 0; i < len; i++) {
 					if (mavlink_parse_char(MAVLINK_COMM_0, _buf[i], &msg, &mavlink_status)) {
